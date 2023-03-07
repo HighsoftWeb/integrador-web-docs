@@ -1,15 +1,12 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
-  },
+  "index": "Turborepo",
+  "design-patterns": "Padrões de Projeto",
+  "ci-cd": "CI/CD",
+  "scripts": "Scripts",
   "contact": {
-    "title": "Contact ↗",
+    "title": "Highsoft Sistemas ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://highsoftsistemas.com.br/",
     "newWindow": true
   }
 }

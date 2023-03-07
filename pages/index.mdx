@@ -1,11 +1,47 @@
-# Introduction
+# Introdução
+Uma breve introdução do projeto criado e a estrutura que deve ser seguida.
+
+## Turborepo
  
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+O projeto do integrador web é um monorepo feito com [Turborepo](https://turbo.build/repo), um sistema de build para JS e TS de alta performance.
 
-## What is Nextra?
+Temos o arquivo de configuração do turbo em `turbo.json`, onde é possível encontrar a pipeline dos scripts do projeto.
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+## Packages
 
-## Documentation
+A pasta `packages` serve para colocar pacotes que podem ser compartilhados por todos os apps da aplicação, como *ui*, *modules*, *assets*...
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+Por padrão, todo package deve seguir a seguinte estrutura:
+```
+<package>
+    └─── src
+        └─── index.ts
+        └─── ...
+    └─── package.json
+    └─── tsconfig.json
+```
+
+- **src**: todo código do package deve estar contido aqui;
+    - **index.ts**: todos os exports do package devem serem feitos aqui;
+
+- **package.json**: define todos as dependencias do pacote;
+    - O `name` deve seguir o padrão `<projectName>/<packageName>`;
+    - O `main` deve ser o nosso arquivo `src/index.ts`, que contem todos nosso exports;
+- **tsconfig.json**: define as configurações do typescript desse package;
+
+## Apps
+
+A pasta `apps` serve para colocar todas os apps da nossa aplicação, como *web*, *server*, *api*...
+
+Por padrão, todo app deve seguir a seguinte estrutura:
+```
+<app>
+    └─── jest.config.js
+    └─── package.json
+    └─── tsconfig.json
+```
+
+- **jest.config.js**: define as configurações do jest para rodar os tests desse app;
+- **package.json**: define todos as dependencias do pacote;
+    - O `name` deve seguir o padrão `<projectName>/<appName>`;
+- **tsconfig.json**: define as configurações do typescript desse app;
