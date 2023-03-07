@@ -10,6 +10,11 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Integrador Web Developers',
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – Integrador Web Developers'
+    }
+  }
 }
 
 export default config

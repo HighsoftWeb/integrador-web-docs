@@ -1,1 +1,23 @@
 # Github Actions
+[Github Actions](https://github.com/features/actions) é uma ferramenta poderosa do github para realizar ações. Com isso, podemos manter um fluxo em cada uma de nossas entregas.
+
+## Dependabot
+O [dependabot](https://github.com/dependabot) é um bot para manter as dependencias do projeto sempre atualizadas.
+
+Temos o arquivo de configuração main em `.github/dependabot.yml`, onde definimos sua `versão`, `pacakage-ecosystem`, `directory`, `time`, `interval`...
+
+## Workflows
+Os [workflows](https://docs.github.com/en/actions/using-workflows) são instruções para executar algo após alguma ação.
+
+- Definimos o gatilho de ação em `on`;
+- Definimos sua execução em `jobs`;
+
+### Tests
+Temos o workflow de testes em `.github/workflows/test.yml`.
+
+Nesse caso, o workflow irá rodar ao fazer um push ou uma pull request para a branch `turbo`.
+
+### Auto-merge
+Temos o workflow de auto-merge em `.github/workflows/auto-merge.yml`
+
+Nesse caso, o workflow irá rodar ao ser criado uma pull request em qualquer branch.
