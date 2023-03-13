@@ -1,7 +1,7 @@
 {
-  "name": "integrador-web-docs",
+  "name": "integrador-web-playbook",
   "version": "0.0.1",
-  "description": "Docs front-end do integrador",
+  "description": "Developers docs do integrador",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HighsoftWeb/integrador-web-docs"
+    "url": "git+https://github.com/HighsoftWeb/integrador-web-playbook"
   },
   "author": "Highsoft Sistemas <desenvolvimento@highsoftsistemas.com.br>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HighsoftWeb/integrador-web-docs/issues"
+    "url": "https://github.com/HighsoftWeb/integrador-web-playbook/issues"
   },
-  "homepage": "https://github.com/HighsoftWeb/integrador-web-docs#readme",
+  "homepage": "https://github.com/HighsoftWeb/integrador-web-playbook#readme",
   "dependencies": {
     "next": "^13.0.6",
     "nextra": "latest",

@@ -1,0 +1,104 @@
+# Adicionando uma nova Plataforma
+
+Para adicionar uma nova Plataforma, você precisará fazer uma serie de implementações necessárias no código.
+
+Lembre-se que o backend precisa ser sido criado da forma correta para não termos problemas nos frontend.
+
+## Modules
+Comece configurando os modules necessarios para rodar essa nova plataforma.
+
+### Settings
+Adicione as novas configurações da nova plataforma nas settings ja existentes.
+
+#### availabeSettingsByPlatform
+Entre em `packages/modules/src/settings/availableSettingsByPlatforms.ts`.
+
+Dentro da variavel `availableSettings` temos um objeto e cada `key` do mesmo corresponde a uma plataforma. Como iremos adicionar uma nova, vá até o final do objeto e adicione o nome da plataforma com um array vazio.
+
+Dentro desse array vazio que criamos iremos definir as configurações ***unicas*** da plataforma.
+
+```ts
+const availableSettings = {
+  ...,
+  newPlatform: ['unique_field', 'other_unique_field', ...]
+}
+```
+
+#### settingInformations
+Entre em `packages/modules/src/settings/settingsInformations.ts`.
+
+Dentro da variavel `settingsInformations` temos um objeto e cada `key` do mesmo corresponde a uma setting e suas informações. Como iremos adicionar uma nova, vá até o final do objeto e adicione o nome da configuração com um objeto vazio.
+
+Dentro desse objeto vazio que criamos iremos definir três informações sobre essa configuração, `label`, `description`, `input`.
+
+```ts
+const settingsInformations = {
+  ...,
+  unique_field: {
+    // label: nome do campo
+    label: 'Unique Field',
+    // description: descricao do que o campo faz/define
+    description: 'Campo Unique Field da configuração da newPlatform',
+    // input: tipo de campo, text | checkbox
+    input: { placeholder: '10', type: 'text' },
+  },
+}
+```
+
+#### getPlatformSettings
+Entre em `packages/modules/src/settings/getPlatformSettings.ts`.
+
+Crie uma arrow function que retorna as settings formatadas.
+
+```ts
+const getNewPlatformSettings: GetPlatformSetting = async (settings) => {
+  return {
+    default: getDefaultFields(settings),
+    unique: getUniqueFields(settings, availableSettings.newPlatform, 'newplatform_settings'),
+  };
+};
+```
+
+### Form
+Ainda dentro dos modules, iremos definir o schemaValidation e os params da view da nova plataforma adicionada.
+
+Crie um arquivo em `packages/modules/src/<new-platform>/<NewPlatform>Form.ts`.
+
+```ts
+type NewPlatformViewProps = {
+  settingId: string;
+  settings: PlatformSettings;
+  priceTables: PriceTableFormProps['priceTables'];
+  orderSituations: Omit<OrderSituationFormProps, 'settingId'>;
+  paymentMethods: Omit<PaymentMethodsFormProps, 'settingId'>;
+  cnpj: string;
+  logs: LogsViewProps['logs'];
+  logsViewer: LogsViewerViewProps['logs'];
+};
+
+type NewPlatformFormParams = yup.InferType<typeof newPlatformFormValidation>;
+
+const newPlatformFormValidation = yup.object({
+  unique_field: yup.string().required('Campo obrigatório'),
+});
+
+export { newPlatformFormValidation };
+export type { NewPlatformFormParams, NewPlatformViewProps };
+```
+
+Não esqueça de exportar todos os dados no `packages/modules/src/index.ts`
+
+```ts
+// new platform
+export { newPlatformFormValidation } from './new-platform/NewPlatformForm';
+export type { NewPlatformFormParams, NewPlatformViewProps } from './new-platform/NewPlatformForm';
+```
+
+Pronto, a parte de módulos esta pronta.
+
+## Pages
+Crie agora as páginas que iram acessar todos os dados dessa nova plataforma.
+
+Crie um diretório em `apps/web/src/pages/<new-platform>`. Dentro dele será colocado todas as páginas desejadas, você pode copiar de alguma outra plataforma ja existente.
+
+Após isso, estará pronto para acessar a página!
