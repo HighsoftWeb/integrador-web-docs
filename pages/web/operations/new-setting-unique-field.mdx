@@ -1,0 +1,52 @@
+# Adicionando um novo campo único em uma setting
+
+Para adicionar um novo campo unico para uma plataforma nas settings, você deve seguir esse tutorial.
+
+## Setting
+Entre em `packages/modules/src/settings/availableSettingsByPlatforms.ts`.
+
+Dentro da variavel `availableSettings` temos um objeto e cada `key` do mesmo corresponde a uma plataforma.
+
+Busque pela key da plataforma que você deseja adicionar um campo novo e adicione o nome do campo dentro do array.
+
+```ts
+const availableSettings = {
+  ...,
+  myPlatform: [..., 'new_field']
+}
+```
+
+#### settingInformations
+Entre em `packages/modules/src/settings/settingsInformations.ts`.
+
+Dentro da variavel `settingsInformations` temos um objeto e cada `key` do mesmo corresponde a uma setting e suas informações. Como iremos adicionar uma nova, vá até o final do objeto e adicione o nome da configuração com um objeto vazio.
+
+Dentro desse objeto vazio que criamos iremos definir três informações sobre essa configuração, `label`, `description`, `input`.
+
+```ts
+const settingsInformations = {
+  ...,
+  new_field: {
+    // label: nome do campo
+    label: 'New Field',
+    // description: descricao do que o campo faz/define
+    description: 'Campo New Field da configuração da myPlatform',
+    // input: tipo de campo, text | checkbox
+    input: { placeholder: '10', type: 'text' },
+  },
+}
+```
+
+### Form
+Entre em `packages/modules/src/<my-platform>/<MyPlatform>Form.ts`.
+
+Adicione o novo campo criado dentro do schema de validação do formulário.
+
+```ts
+...
+const myPlatformFormValidation = yup.object({
+  ...
+  new_field: yup.string().required('Campo obrigatório'),
+});
+...
+```
